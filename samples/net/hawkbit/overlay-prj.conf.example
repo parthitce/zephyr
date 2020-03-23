@@ -1,0 +1,18 @@
+#
+# Copyright (c) 2020 Linumiz
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+#Example of product_uid, you must set your product uid.
+
+#If you use the autohandler, need set HAWKBIT_POLL_INTERVAL.
+#This example, the hawkbit will poll on the server
+#request for updates one to one minutes.
+#(min: 0 minute, max: 30days)
+CONFIG_HAWKBIT_POLL_INTERVAL=1
+
+#You need set the hawkbit ip Address.
+#This is a example of ip address
+CONFIG_HAWKBIT_SERVER="192.168.1.108"
+CONFIG_HAWKBIT_PORT="8080"

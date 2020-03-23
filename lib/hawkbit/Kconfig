@@ -1,0 +1,74 @@
+#
+# Copyright (c) 2020 Linumiz
+#
+# SPDX-License_identifier: Apache-2.0
+#
+
+menuconfig HAWKBIT
+	bool "Hawkbit Firmware Over-the-Air support"
+	select FLASH
+	select REBOOT
+	select IMG_MANAGER
+	select MPU_ALLOW_FLASH_WRITE
+	select NETWORKING
+	select BOOTLOADER_MCUBOOT
+	select NET_TCP
+	select NET_SOCKETS
+	select NET_SOCKETS_POSIX_NAMES
+	select HTTP_CLIENT
+	select DNS_RESOLVER
+	select JSON_LIBRARY
+	select TINYCRYPT
+	select TINYCRYPT_SHA256	
+	select HWINFO
+	select IMG_ERASE_PROGRESSIVELY	
+	select NVS
+	help 
+	  Hawkbit is a domain independentback-end framework for polling out
+	  software updates to constrained edge devices as well as more powerful
+	  controllers and gateways connected to IP based networking infrastructure.
+
+config HAWKBIT_POLL_INTERVAL	
+	int "Time to poll interval (in minutes)"
+	default 1440
+	range 0 43200
+	depends on HAWKBIT
+	help
+	  Set the interval that the hawkbit update server will be polled.
+	  This time interval is zero and 43200 minutes(30 days).
+
+config HAWKBIT_SUPPORTED_HARDWARE_MAX
+	int "Max number of supported hardware"
+	default 1
+	range 1 100
+	depends on HAWKBIT
+	help 
+	  Configure the max number of supported hardware
+	  by the same image.
+
+config HAWKBIT_SHELL
+	bool "Enable Hawkbit shell utilities"
+	depends on HAWKBIT
+	depends on SHELL
+	select KERNEL_SHELL
+	help 
+	  Activate shell module that provides Hawkbit commands.
+
+config HAWKBIT_SERVER
+	string "User address for the hawkbit server"
+	default "192.168.1.108"
+	depends on HAWKBIT
+	help 
+	  Configure the hawkbit server address.
+
+config HAWKBIT_PORT
+	string "Port address for the hawkbit server"
+	default "8443"
+	depends on HAWKBIT
+	help
+	  Configure the hawkbit port number.
+
+module = HAWKBIT
+module-str = Log Level for hawkbit
+module-help = Enables logging for Hawkbit code.
+source "subsys/logging/Kconfig.template.log_config"

@@ -13,6 +13,10 @@ source "lib/fnmatch/Kconfig"
 
 source "lib/gui/Kconfig"
 
+source "lib/hawkbit/Kconfig"
+
+#source "lib/hawkbit_1/Kconfig"
+
 source "lib/os/Kconfig"
 
 source "lib/posix/Kconfig"
