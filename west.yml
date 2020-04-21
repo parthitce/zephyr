@@ -21,6 +21,8 @@ manifest:
   remotes:
     - name: upstream
       url-base: https://github.com/zephyrproject-rtos
+    - name: infineon
+      url-base: https://github.com/linumiz
 
   #
   # Please add items below based on alphabetical order
@@ -52,6 +54,10 @@ manifest:
     - name: hal_cypress
       revision: a12d92816a53a521d79cefcf5c38b9dc8a4fed6e
       path: modules/hal/cypress
+    - name: hal_infineon
+      revision: 3a27cf18351b2891afbda34ce4a7f528cd12c4d2
+      path: modules/hal/infineon
+      remote: infineon
     - name: hal_nordic
       revision: 1ebfdf148b2ca1d9ab9267ab2cd64cc00f32d505
       path: modules/hal/nordic
