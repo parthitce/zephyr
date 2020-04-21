@@ -11,5 +11,6 @@ config SOC_SERIES_XMC_4XXX
 	select CPU_CORTEX_M_HAS_DWT
 	select SOC_FAMILY_XMC
 	select CPU_HAS_ARM_MPU
+	select HAS_XMCLIB_UART
 	help
 	  Enable support for XMC 4xxx MCU series
