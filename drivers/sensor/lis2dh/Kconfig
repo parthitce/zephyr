@@ -138,4 +138,43 @@ config LIS2DH_ODR_9_LOW
 
 endchoice
 
+menuconfig LIS2DH_PULSE
+	bool "Pulse detection"
+	help 
+	  Enable pulse (single/double tap) detection
+
+choice 
+	prompt "PULSE interrupt source"
+	default LIS2DH_ONLY_SINGLE
+
+config LIS2DH_ONLY_SINGLE
+	bool "single"
+
+config LIS2DH_SINGLE_DOUBLE
+	bool "single/double"
+
+endchoice
+
+config LIS2DH_CLICK_THS
+	hex "Pulse threshold"
+	range 0 0x7F
+	default 0x30
+	help 
+	  Threshold to set the click-event detection.
+
+config LIS2DH_CLICK_TIME_LIMIT
+	hex "Click time limit"
+	range 0 0x7F
+	default 0x18
+
+config LIS2DH_CLICK_TIME_LATENCY
+	hex "Click time latency"
+	range 0 0xFF
+	default 0x02
+
+config LIS2DH_CLICK_TIME_WINDOW
+        hex "Click time window"
+        range 0 0xFF
+        default 0xE0
+
 endif # LIS2DH

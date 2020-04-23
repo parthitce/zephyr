@@ -133,9 +133,8 @@ enum sensor_channel {
 	SENSOR_CHAN_POS_DY,
 	/** Position change on the Z axis, in points. */
 	SENSOR_CHAN_POS_DZ,
-
-	/** Revolutions per minute, in RPM. */
-	SENSOR_CHAN_RPM,
+        /** Activity and Inactivity of any axis **/
+        SENSOR_CHAN_ACTIVITY,
 
 	/** Voltage, in volts **/
 	SENSOR_CHAN_GAUGE_VOLTAGE,
@@ -161,7 +160,7 @@ enum sensor_channel {
 	SENSOR_CHAN_GAUGE_AVG_POWER,
 	/** State of health measurement in % **/
 	SENSOR_CHAN_GAUGE_STATE_OF_HEALTH,
-
+	
 	/** All channels. */
 	SENSOR_CHAN_ALL,
 
@@ -218,9 +217,6 @@ enum sensor_trigger_type {
 	/** Trigger fires when a double tap is detected. */
 	SENSOR_TRIG_DOUBLE_TAP,
 
-	/** Trigger fires when a free fall is detected. */
-	SENSOR_TRIG_FREEFALL,
-
 	/**
 	 * Number of all common sensor triggers.
 	 */
@@ -268,6 +264,12 @@ enum sensor_attribute {
 	 * outside the threshold for the trigger to fire.
 	 */
 	SENSOR_ATTR_SLOPE_DUR,
+        /** Threshold for activity trigger. **/
+        SENSOR_ATTR_ACTIVITY_TH,
+        /** Duration for which the slope values needs to be
+         * outside the threshold for th trigger to fire.
+         */
+        SENSOR_ATTR_ACTIVITY_DUR,
 	/** Oversampling factor */
 	SENSOR_ATTR_OVERSAMPLING,
 	/** Sensor range, in SI units. */
@@ -347,7 +349,7 @@ typedef int (*sensor_channel_get_t)(struct device *dev,
 				    enum sensor_channel chan,
 				    struct sensor_value *val);
 
-__subsystem struct sensor_driver_api {
+struct sensor_driver_api {
 	sensor_attr_set_t attr_set;
 	sensor_trigger_set_t trigger_set;
 	sensor_sample_fetch_t sample_fetch;
