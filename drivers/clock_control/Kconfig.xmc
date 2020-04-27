@@ -1,0 +1,122 @@
+# Copyright (c) 2020 Linumiz
+#
+# Author: Parthiban Nallathambi <parthiban@linumiz.com>
+# SPDX-License-Identifier: Apache-2.0
+
+menuconfig CLOCK_CONTROL_XMC
+	bool "XMC CCU driver"
+	depends on HAS_CCU
+	help
+	  Enable support for xmc ccu driver.
+
+if CLOCK_CONTROL_XMC
+
+config CLOCK_CONTROL_XMC_DEVICE_INIT_PRIORITY
+	int "Clock Control Device Priority"
+	default 1
+	help
+	  This option controls the priority of clock control
+	  device initialization. Higher priority ensures that the device
+	  is initialized earlier in the startup cycle. If unsure, leave
+	  at default value 1
+
+config CLOCK_XMC_PLL_MODE
+	int "PLL Operation mode"
+	default 1
+	range 1 2
+	help
+	  PLL output can be operated one of two available modes. Normal
+	  (default) and Prescaler mode. Allowed values 1, 2
+
+choice CLOCK_XMC_PLL_CLK_SRC
+	prompt "XMC PLL Clock Source"
+
+config CLOCK_XMC_PLL_CLK_SRC_OSCHP
+	bool "OSCHP"
+	help
+	  Use OSCHP (external crystal oscillator) as source for PLL clock
+
+config CLOCK_XMC_PLL_CLK_SRC_OFI
+	bool "OFI"
+	help
+	  Use OFI (backup clock) as source for PLL clock
+
+endchoice # CLOCK_XMC_SYSPLLCLK_SRC
+
+if CLOCK_XMC_PLL_CLK_SRC_OSCHP && CLOCK_XMC_PLL_MODE = 1
+
+# PLL = (N / P * K2) * OSC
+config CLOCK_XMC_PLL_P_DIVISOR
+	int "PLL input divisor"
+	default 1
+	help
+	  Input P divisor for the PLL VCO input frequency
+
+config CLOCK_XMC_PLL_N_MULTIPLIER
+	int "PLL multiplier"
+	default 40
+	help
+	  N multiplier for the PLL VCO output frequency
+
+config CLOCK_XMC_PLL_K2_DIVISOR
+	int "PLL K2 Divisor"
+	default 4
+	help
+	  K2 divisor for the PLL VCO output frequency
+endif
+
+if CLOCK_XMC_PLL_MODE = 2
+
+config CLOCK_XMC_PLL_K1_DIVISOR
+	int "PLL K1 Divisor"
+	default 1
+	help
+	  K1 divisor for the PLL output clock in prescaler mode
+
+endif
+
+choice CLOCK_XMC_SYS_CLK_SRC
+	prompt "XMC System Clock Source"
+
+config CLOCK_XMC_SYS_CLK_SRC_PLL
+	bool "PLL"
+	help
+	  Use PLL as source for system core clock
+
+config CLOCK_XMC_SYS_CLK_SRC_OFI
+	bool "OFI"
+	help
+	  Use OFI (fast internal clock) as source for system core clock
+
+endchoice # CLOCK_XMC_SYS_CLK_SRC
+
+config CLOCK_XMC_SYS_CLK_DIV
+	int "system clock division value"
+	default 1
+	range 1 255
+	help
+	  System clock divider for the PLL output clock to produce fSYS. fSYS
+	  is consumed by CPU and peripherals
+
+config CLOCK_XMC_CPU_CLK_DIV
+	int "CPU Clock divider enable"
+	default 1
+	range 1 2
+	help
+	  Enable CPU clock divider to produce fSYS/2. Available values: 1, 2
+
+config CLOCK_XMC_CCU_CLK_DIV
+	int "CCU (Capture Compare Unit) Clock divider enable"
+	default 1
+	range 1 2
+	help
+	  Enable CCU clock divider to produce fSYS/2. Available values: 1, 2
+
+config CLOCK_XMC_PB_CLK_DIV
+	int "PB (Peripheral Bus) Clock divider enable"
+	default 1
+	range 1 2
+	help
+	  Enable PB clock divider to produce fCPU/2. Available values: 1, 2
+
+endif # CLOCK_CONTROL_XMC

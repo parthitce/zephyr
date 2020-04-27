@@ -10,6 +10,12 @@ config HAS_XMCLIB
 
 if HAS_XMCLIB
 
+config HAS_XMCLIB_CCU
+	bool
+	help
+	  Enable XMCLIB Clock Control Unit (CCU)
+
+
 config HAS_XMCLIB_UART
 	bool
 	help

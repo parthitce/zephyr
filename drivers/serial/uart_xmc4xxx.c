@@ -47,12 +47,12 @@ static int uart_xmc4xxx_init(struct device *dev)
 
 	/* configure PIN 1.4 and 1.5 as UART */
 	XMC_UART_CH_Init(uart, &(data->config));
-	XMC_GPIO_SetMode(P1_4, XMC_GPIO_MODE_INPUT_TRISTATE);
+	XMC_GPIO_SetMode(P0_0, XMC_GPIO_MODE_INPUT_TRISTATE);
 	XMC_UART_CH_SetInputSource(uart, XMC_UART_CH_INPUT_RXD,
-				   USIC0_C0_DX0_P1_4);
+				   USIC1_C1_DX0_P0_0);
 	XMC_UART_CH_Start(uart);
 
-	XMC_GPIO_SetMode(P1_5, XMC_GPIO_MODE_OUTPUT_PUSH_PULL | P1_5_AF_U0C0_DOUT0);
+	XMC_GPIO_SetMode(P0_1, XMC_GPIO_MODE_OUTPUT_PUSH_PULL | P0_1_AF_U1C1_DOUT0);
 
 	return 0;
 }

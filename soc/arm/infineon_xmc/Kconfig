@@ -19,4 +19,9 @@ source "soc/arm/infineon_xmc/*/Kconfig.soc"
 config SOC_PART_NUMBER
 	default SOC_PART_NUMBER_XMC_4XXX if SOC_SERIES_XMC_4XXX
 
+config HAS_CCU
+	bool
+	help
+	  Set if the clock control unit (CCU) module is present in the SoC.
+
 endif # SOC_FAMILY_XMC

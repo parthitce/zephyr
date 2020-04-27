@@ -24,7 +24,4 @@ void z_platform_init(void)
 	temp &= ~FLASH_FCON_WSPFLASH_Msk;
 	temp |= PMU_FLASH_WS;
 	FLASH0->FCON = temp;
-
-	/* configure PLL & system clock */
-	SystemCoreClockSetup();
 }

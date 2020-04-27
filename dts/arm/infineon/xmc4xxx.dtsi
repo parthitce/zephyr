@@ -6,6 +6,7 @@
  */
 
 #include <arm/armv7-m.dtsi>
+#include <dt-bindings/clock/xmc4_ccu.h>
 
 / {
 	cpus {
@@ -42,35 +43,46 @@
 	};
 
 	soc {
-		uart0: uart@48020200 {
-			compatible = "infineon,xmc4xxx-uart";
-			reg = <0x48020200 0x1ff>;
-			clocks = <&sysclk>;
-			label = "UART_0";
-			status = "disabled";
+		ccu: clock-controller@50004600 {
+			compatible = "infineon,xmc-ccu";
+			reg = <0x50004600 0x13c>;
+			label = "CCU";
+			#clock-cells = <2>;
 		};
 
-		uart1: uart@40030000 {
-			compatible = "infineon,xmc4xxx-uart";
+		usic0ch0: usic@40030000 {
 			reg = <0x40030000 0x1ff>;
-			clocks = <&sysclk>;
-			label = "UART_1";
+			clocks = <&ccu XMC_SCU_PERIPHERAL_CLOCK_USIC0 XMC_SCU_PERIPHERAL_RESET_USIC0>;
 			status = "disabled";
 		};
 
-		uart2: uart@40030000 {
-			compatible = "infineon,xmc4xxx-uart";
-			reg = <0x40030000 0x1ff>;
-			clocks = <&sysclk>;
-			label = "UART_2";
+		usic0ch1: usic@40030200 {
+			reg = <0x40030200 0x1ff>;
+			clocks = <&ccu XMC_SCU_PERIPHERAL_CLOCK_USIC0 XMC_SCU_PERIPHERAL_RESET_USIC0>;
 			status = "disabled";
 		};
 
-		uart3: uart@48020000 {
-			compatible = "infineon,xmc4xxx-uart";
+		usic1ch0: usic@48020000 {
 			reg = <0x48020000 0x1ff>;
-			clocks = <&sysclk>;
-			label = "UART_3";
+			clocks = <&ccu XMC_SCU_PERIPHERAL_CLOCK_USIC1 XMC_SCU_PERIPHERAL_RESET_USIC1>;
+			status = "disabled";
+		};
+
+		usic1ch1: usic@48020200 {
+			reg = <0x48020200 0x1ff>;
+			clocks = <&ccu XMC_SCU_PERIPHERAL_CLOCK_USIC1 XMC_SCU_PERIPHERAL_RESET_USIC1>;
+			status = "disabled";
+		};
+
+		usic2ch0: usic@48024000 {
+			reg = <0x48024000 0x1ff>;
+			clocks = <&ccu XMC_SCU_PERIPHERAL_CLOCK_USIC2 XMC_SCU_PERIPHERAL_RESET_USIC2>;
+			status = "disabled";
+		};
+
+		usic2ch1: usic@48024200 {
+			reg = <0x48024200 0x1ff>;
+			clocks = <&ccu XMC_SCU_PERIPHERAL_CLOCK_USIC2 XMC_SCU_PERIPHERAL_RESET_USIC2>;
 			status = "disabled";
 		};
 	};
