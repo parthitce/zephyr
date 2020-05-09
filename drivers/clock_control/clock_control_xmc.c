@@ -94,7 +94,6 @@ static int xmc_ccu_init(struct device *dev)
 		.fccu_clkdiv = CONFIG_CLOCK_XMC_CCU_CLK_DIV,
 		.fperipheral_clkdiv = CONFIG_CLOCK_XMC_PB_CLK_DIV,
 
-		/* TODO: enable_osculp with pm_control for low power clock */
 		.enable_oschp = true,
 		.calibration_mode = XMC_SCU_CLOCK_FOFI_CALIBRATION_MODE_FACTORY,
 	};

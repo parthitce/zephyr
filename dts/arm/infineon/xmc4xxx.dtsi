@@ -52,37 +52,37 @@
 
 		usic0ch0: usic@40030000 {
 			reg = <0x40030000 0x1ff>;
-			clocks = <&sysclk>;
+			clocks = <&ccu XMC_SCU_PERIPHERAL_CLOCK_USIC0 XMC_SCU_PERIPHERAL_RESET_USIC0>;
 			status = "disabled";
 		};
 
 		usic0ch1: usic@40030200 {
 			reg = <0x40030200 0x1ff>;
-			clocks = <&sysclk>;
+			clocks = <&ccu XMC_SCU_PERIPHERAL_CLOCK_USIC0 XMC_SCU_PERIPHERAL_RESET_USIC0>;
 			status = "disabled";
 		};
 
 		usic1ch0: usic@48020000 {
 			reg = <0x48020000 0x1ff>;
-			clocks = <&sysclk>;
+			clocks = <&ccu XMC_SCU_PERIPHERAL_CLOCK_USIC1 XMC_SCU_PERIPHERAL_RESET_USIC1>;
 			status = "disabled";
 		};
 
 		usic1ch1: usic@48020200 {
 			reg = <0x48020200 0x1ff>;
-			clocks = <&sysclk>;
+			clocks = <&ccu XMC_SCU_PERIPHERAL_CLOCK_USIC1 XMC_SCU_PERIPHERAL_RESET_USIC1>;
 			status = "disabled";
 		};
 
 		usic2ch0: usic@48024000 {
 			reg = <0x48024000 0x1ff>;
-			clocks = <&sysclk>;
+			clocks = <&ccu XMC_SCU_PERIPHERAL_CLOCK_USIC2 XMC_SCU_PERIPHERAL_RESET_USIC2>;
 			status = "disabled";
 		};
 
 		usic2ch1: usic@48024200 {
 			reg = <0x48024200 0x1ff>;
-			clocks = <&sysclk>;
+			clocks = <&ccu XMC_SCU_PERIPHERAL_CLOCK_USIC2 XMC_SCU_PERIPHERAL_RESET_USIC2>;
 			status = "disabled";
 		};
 	};
