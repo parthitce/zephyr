@@ -6,6 +6,7 @@
  */
 
 #include <arm/armv7-m.dtsi>
+#include <dt-bindings/clock/xmc4_ccu.h>
 
 / {
 	cpus {
@@ -42,6 +43,13 @@
 	};
 
 	soc {
+		ccu: clock-controller@50004600 {
+			compatible = "infineon,xmc-ccu";
+			reg = <0x50004600 0x13c>;
+			label = "CCU";
+			#clock-cells = <2>;
+		};
+
 		usic0ch0: usic@40030000 {
 			reg = <0x40030000 0x1ff>;
 			clocks = <&sysclk>;

@@ -1,0 +1,16 @@
+description: XMC CCU (Clock Control Unit)
+
+compatible: "infineon,xmc-ccu"
+
+include: [clock-controller.yaml, base.yaml]
+
+properties:
+    reg:
+      required: true
+
+    "#clock-cells":
+      const: 2
+
+clock-cells:
+  - bus
+  - reset

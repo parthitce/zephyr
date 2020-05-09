@@ -11,6 +11,7 @@ choice
 config SOC_XMC4500
 	bool "SOC_XMC4500"
 	select HAS_XMCLIB
+	select HAS_CCU
 
 endchoice
 

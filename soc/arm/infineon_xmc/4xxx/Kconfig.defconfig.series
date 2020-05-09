@@ -16,6 +16,13 @@ config UART_XMC4XXX
 	default y
 	depends on SERIAL
 
+if CLOCK_CONTROL
+
+config CLOCK_CONTROL_XMC
+	default y
+
+endif # CLOCK_CONTROL
+
 source "soc/arm/infineon_xmc/4xxx/Kconfig.defconfig.xmc*"
 
 endif # SOC_SERIES_XMC_4XXX
