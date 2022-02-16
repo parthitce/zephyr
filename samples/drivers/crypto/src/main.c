@@ -31,8 +31,8 @@ void main(void)
 	   0x39, 0x39, 0x39, 0x33
 	   };
 	 */
-	unsigned char *key = "abcdefghijklmnopabababababababab";
-#if 0
+//	unsigned char *key = "abcdefghijklmnopabababababababab";
+#if 1
 	unsigned char key[] = {
 		0x61, 0x62, 0x63, 0x64, 0x65, 0x66, 0x67, 0x68, 0x69, 0x6a, 0x6b, 0x6c,
 		0x6d, 0x6e, 0x6f, 0x70, 0x61, 0x62, 0x61, 0x62, 0x61, 0x62, 0x61, 0x62,
@@ -40,8 +40,8 @@ void main(void)
 	};
 #endif
 	char *input = "Mark C's ESP32 GCM Example code!a";
-	unsigned char *iv = "abababababababab";
-#if 0
+//	unsigned char *iv = "abababababababab";
+#if 1
 	unsigned char iv[] = {
 		0x61, 0x62, 0x61, 0x62, 0x61, 0x62, 0x61, 0x62, 0x61, 0x62, 0x61, 0x62,
 		0x61, 0x62, 0x61, 0x62
@@ -74,7 +74,7 @@ void main(void)
 	mbedtls_gcm_update(&aes,(const unsigned char*)input, strlen(input), output, sizeof(output), &out_len);
 	printf("out %d\n", out_len);
 	// Free up the context.
-	mbedtls_gcm_free( &aes );
+	//mbedtls_gcm_free( &aes );
 
 #if 1
 	for (int i = 0; i < strlen(input); i++) {  
@@ -84,17 +84,19 @@ void main(void)
 
 #if 1
 	mbedtls_gcm_init( &aes );
-	mbedtls_gcm_setkey( &aes,MBEDTLS_CIPHER_ID_AES , key, strlen(key) * 8);
-	mbedtls_gcm_starts(&aes, MBEDTLS_GCM_DECRYPT, iv, strlen(iv));
+	//rc = mbedtls_gcm_setkey( &aes,MBEDTLS_CIPHER_ID_AES , key, strlen(key) * 8);
+	//printf("rc %d\n",  rc);
+	rc = mbedtls_gcm_starts(&aes, MBEDTLS_GCM_DECRYPT, iv, strlen(iv));
+	printf("rc %d\n",  rc);
 	//	mbedtls_gcm_update(&aes,(const unsigned char*)output, strlen(output), fin, sizeof(fin), &out_len);
 	//	printf("out %d\n", out_len);
 
-	mbedtls_gcm_update(&aes,(const unsigned char*)output, 16, fin, sizeof(fin), &out_len);
-	printf("out %d\n", out_len);
-	mbedtls_gcm_update(&aes,(const unsigned char*)&output[16], 16, &fin[16], sizeof(fin), &out_len);
-	printf("out %d\n", out_len);
-	mbedtls_gcm_update(&aes,(const unsigned char*)&output[32], 1, &fin[32], sizeof(fin), &out_len);
-	printf("out %d\n", out_len);
+	rc = mbedtls_gcm_update(&aes,(const unsigned char*)output, 16, fin, sizeof(fin), &out_len);
+	printf("out %d rc %d\n", out_len, rc);
+	rc = mbedtls_gcm_update(&aes,(const unsigned char*)&output[16], 16, &fin[16], sizeof(fin), &out_len);
+	printf("out %d rc %d\n", out_len, rc);
+	rc = mbedtls_gcm_update(&aes,(const unsigned char*)&output[32], 1, &fin[32], sizeof(fin), &out_len);
+	printf("out %d rc %d\n", out_len, rc);
 	char tag[16] = {0};
 	//rc = mbedtls_gcm_finish(&aes, &fin[32], sizeof(fin), &out_len, tag, 16);
 	rc = mbedtls_gcm_finish(&aes, NULL, 0, NULL, tag, 16);
